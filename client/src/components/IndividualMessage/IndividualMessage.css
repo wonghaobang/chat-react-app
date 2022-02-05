@@ -1,0 +1,41 @@
+.messageContainer p {
+  margin: 0;
+}
+
+.messageContainer {
+  display: flex;
+  margin: 0.25em 0.5em;
+}
+
+.messageBubble {
+  border-radius: 0.75em;
+  padding: 0.75em;
+  word-wrap: anywhere;
+  max-width: 50%;
+}
+
+.justify-start {
+  justify-content: start;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.bg-blue {
+  background-color: #2979ff;
+  color: white;
+}
+
+.bg-lightgrey {
+  background-color: #f3f3f3;
+  color: black;
+}
+
+.color-pale {
+  color: lightseagreen;
+}
+
+.color-purple {
+  color: purple;
+}

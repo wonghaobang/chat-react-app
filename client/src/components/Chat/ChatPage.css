@@ -1,0 +1,129 @@
+.fa-circle {
+  color: rgb(138, 248, 138);
+  font-size: 0.35rem;
+}
+
+.fa-times {
+  color: rgb(211, 16, 16);
+  color: white;
+  cursor: pointer;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chat__outercontainer {
+  width: 80%;
+}
+
+.chatbox__section {
+}
+
+.chatbox__infobar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #2979ff;
+  border-radius: 4px 4px 0 0;
+  padding: 0.5em 1.5em;
+}
+
+.chatbox__infobar span {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.chatbox__infobar__roomName {
+  color: white;
+  font-size: 1rem;
+}
+
+.chatbox__form {
+  display: flex;
+}
+
+.chatbox__input {
+  border: none;
+  border-radius: 0;
+  padding: 1.5em 1em;
+  font-size: 1.2rem;
+  width: 80%;
+  border-top: 3px solid rgb(228, 220, 220);
+}
+
+.chatbox__input:focus {
+  outline: none;
+}
+
+.sendButton {
+  color: #fff;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: #2979ff;
+  display: inline-block;
+  border: none;
+  width: 20%;
+}
+
+.messages {
+  background-color: white;
+  height: 400px;
+}
+
+.users__section {
+  display: none;
+}
+
+.users__heading {
+  color: white;
+  font-size: 2rem;
+}
+
+.users__list {
+  margin: 0;
+  padding: 0;
+}
+
+.users__item {
+  list-style-type: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.ml-1 {
+  margin-left: 1.25em;
+}
+
+.mb-0 {
+  margin-bottom: 0.25em;
+}
+
+@media (min-width: 900px) {
+  .users__section {
+    display: block;
+  }
+
+  .chat__outercontainer {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1100px;
+    /* border: 2px solid lavender; */
+  }
+
+  .chatbox__section {
+    width: 60%;
+    /* border: 2px solid red; */
+  }
+
+  .users__section {
+    width: 37%;
+    /* border: 2px solid palevioletred; */
+  }
+}

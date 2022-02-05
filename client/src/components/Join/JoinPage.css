@@ -1,0 +1,46 @@
+.join__outerContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.join__innerContainer {
+  width: 50%;
+  max-width: 400px;
+}
+
+.join__heading {
+  color: white;
+  font-size: 2.5rem;
+  text-align: center;
+  padding-bottom: 10px;
+  border-bottom: 2px solid white;
+}
+
+.join__input {
+  font-family: inherit; /* "Roboto", sans-serif */
+  font-size: 0.9rem;
+  display: block;
+  width: 100%;
+  border-radius: 0;
+  padding: 1em 1.25em;
+}
+
+.join__btn {
+  font-family: inherit; /* "Roboto", sans-serif */
+  font-size: 0.9rem;
+  background: #2979ff;
+  color: white;
+  border: none;
+  display: block;
+  width: 100%;
+  text-transform: uppercase;
+  padding: 1.5em;
+  border-radius: 5px;
+}
+
+.mb-1 {
+  margin-top: 1.5em;
+}
