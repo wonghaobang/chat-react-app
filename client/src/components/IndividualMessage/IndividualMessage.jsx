@@ -12,20 +12,24 @@ const IndividualMessage = ({ message }) => {
     return (
       <div className="messageContainer justify-end">
         <div className="messageBubble bg-blue color-white">
-          <p>{ReactEmoji.emojify(message.text)}</p>
+          <p className="messageText">{ReactEmoji.emojify(message.text)}</p>
+          <p className="messageTime color-lightblue">{message.currentTime}</p>
         </div>
       </div>
     )
   } else {
     return (
-      <div className="messageContainer justify-start">
+      <div className="messageContainer flex-dir-col align-items-start">
+        <p
+          className={`messageSender ${
+            message.user === "admin" ? "color-pale" : ""
+          }`}
+        >
+          {message.user}
+        </p>
         <div className="messageBubble bg-lightgrey color-black">
-          <p
-            className={message.user === "admin" ? "color-purple" : "color-pale"}
-          >
-            {message.user}
-          </p>
-          <p>{ReactEmoji.emojify(message.text)}</p>
+          <p className="messageText">{ReactEmoji.emojify(message.text)}</p>
+          <p className="messageTime color-lightgrey">{message.currentTime}</p>
         </div>
       </div>
     )

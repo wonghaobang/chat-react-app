@@ -13,6 +13,7 @@ const Chat = () => {
   const [users, setUsers] = useState([])
   const [messages, setMessages] = useState([])
   const [message, setMessage] = useState("")
+  const [isCurrentlyTyping, setIsCurrentlyTyping] = useState(false)
   const ENDPOINT = "localhost:5000"
   const history = useHistory()
 
@@ -37,13 +38,24 @@ const Chat = () => {
       setUsers(users)
     })
 
+    socket.on("typing", ({ typingStatus }) => {
+      setIsCurrentlyTyping(typingStatus)
+    })
+
     return () => {
       console.log("unmounting chatPage component")
       socket.disconnect()
       setName("")
       setRoom("")
+      setMessages([])
+      setMessage("")
     }
   }, [])
+
+  const handleTyping = (e) => {
+    setMessage(e.target.value)
+    socket.emit("typing", e.target.value)
+  }
 
   const handleMessageSubmit = (e) => {
     e.preventDefault()
@@ -51,6 +63,7 @@ const Chat = () => {
     socket.emit("sendMessage", message, () => {
       setMessage("")
     })
+    socket.emit("typing", "") // kind of like a workaround, any better way?
   }
 
   const handleLeaveRoom = (e) => {
@@ -78,13 +91,21 @@ const Chat = () => {
             ))}
           </ScrollToBottom>
 
+          {isCurrentlyTyping ? (
+            <p className="currentlyTypingMessage">
+              User is typing a message...
+            </p>
+          ) : (
+            ""
+          )}
+
           {/* form */}
           <form onSubmit={handleMessageSubmit} className="chatbox__form">
             <input
               type="text"
               placeholder="Type a message..."
               value={message}
-              onChange={(e) => setMessage(e.target.value)}
+              onChange={handleTyping}
               className="chatbox__input"
             />
             <button className="sendButton" type="submit">

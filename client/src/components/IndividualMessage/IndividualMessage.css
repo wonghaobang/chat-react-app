@@ -1,25 +1,45 @@
-.messageContainer p {
-  margin: 0;
-}
-
 .messageContainer {
+  margin: 0.5em;
   display: flex;
-  margin: 0.25em 0.5em;
+  /* border: 2px solid saddlebrown; */
 }
 
 .messageBubble {
   border-radius: 0.75em;
-  padding: 0.75em;
+  padding: 0.5em 0.75em;
   word-wrap: anywhere;
-  max-width: 50%;
+  max-width: 47%;
+  /* border: 2px solid fuchsia; */
 }
 
-.justify-start {
-  justify-content: start;
+.messageSender {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  color: #9897a9;
+  margin: 0 0.1em 0 0.75em;
+}
+
+.messageText {
+  margin: 0;
+  /* border: 2px solid yellowgreen; */
+}
+
+.messageTime {
+  text-align: right;
+  font-size: 0.75rem;
+  margin: 0;
+  margin-top: 0.5em;
 }
 
 .justify-end {
   justify-content: flex-end;
+}
+
+.flex-dir-col {
+  flex-direction: column;
+}
+
+.align-items-start {
+  align-items: flex-start;
 }
 
 .bg-blue {
@@ -36,6 +56,10 @@
   color: lightseagreen;
 }
 
-.color-purple {
-  color: purple;
+.color-lightgrey {
+  color: rgb(175, 171, 171);
+}
+
+.color-lightblue {
+  color: lightblue;
 }
