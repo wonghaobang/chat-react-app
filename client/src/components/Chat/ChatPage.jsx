@@ -14,8 +14,8 @@ const Chat = () => {
   const [messages, setMessages] = useState([])
   const [message, setMessage] = useState("")
   const [currentlyTypingUsers, setCurrentlyTypingUsers] = useState([])
-  const ENDPOINT = "localhost:5000"
-  // const ENDPOINT = "https://wbdv-chat-app-server-node.herokuapp.com"
+  // const ENDPOINT = "localhost:5000"
+  const ENDPOINT = "https://wbdv-chat-app-server-node.herokuapp.com"
   const history = useHistory()
 
   useEffect(() => {
@@ -78,7 +78,7 @@ const Chat = () => {
               <i className="fas fa-circle"></i>
               <h2 className="chatbox__infobar__roomName">{room}</h2>
             </span>
-            <a href="">
+            <a href="/">
               <i className="fas fa-times"></i>
             </a>
           </div>
