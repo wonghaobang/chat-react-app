@@ -6,9 +6,12 @@ const cors = require("cors")
 const PORT = process.env.PORT || 5000
 const router = require("./router")
 const { addUser, removeUser, getUser, getUsersInRoom } = require("./users")
+const {
+  addCurrentlyTypingUser,
+  removeCurrentlyTypingUser,
+} = require("./currentlyTypingUsers")
 
 const app = express()
-// app.use(cors())
 app.use(
   cors({
     origin: "*",
@@ -62,19 +65,42 @@ io.on("connection", (socket) => {
     callback()
   })
 
-  // doesn't work perfectly in group chat, need to think of another way
   socket.on("typing", (message) => {
     const user = getUser(socket.id)
-    socket.broadcast.to(user.room).emit("typing", {
-      typingStatus: message.length !== 0,
-    })
+    let updatedCurrentlyTypingUsers
+
+    if (message.length > 0) {
+      updatedCurrentlyTypingUsers = addCurrentlyTypingUser({
+        id: socket.id,
+        name: user.name,
+        room: user.room,
+      })
+    }
+
+    if (message.length === 0) {
+      updatedCurrentlyTypingUsers = removeCurrentlyTypingUser({
+        id: socket.id,
+        name: user.name,
+        room: user.room,
+      })
+    }
+
+    socket.broadcast.to(user.room).emit("typing", updatedCurrentlyTypingUsers)
   })
 
   socket.on("disconnect", () => {
     console.log("disconnect fired")
+
     const user = removeUser(socket.id)
 
+    const updatedCurrentlyTypingUsers = removeCurrentlyTypingUser({
+      id: socket.id,
+      name: user.name,
+      room: user.room,
+    })
+
     if (user) {
+      io.to(user.room).emit("typing", updatedCurrentlyTypingUsers)
       io.to(user.room).emit("message", {
         user: "admin",
         text: `${user.name} has left`,

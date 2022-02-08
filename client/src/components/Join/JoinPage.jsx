@@ -12,7 +12,6 @@ const Join = () => {
     if (!name || !room) {
       return
     }
-    console.log(name, room)
     history.push(`/room/${room}`)
   }
 

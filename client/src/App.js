@@ -1,5 +1,5 @@
 import React from "react"
-import { BrowserRouter, Route } from "react-router-dom"
+import { BrowserRouter, Route, Redirect } from "react-router-dom"
 import JoinPage from "./components/Join/JoinPage"
 import ChatPage from "./components/Chat/ChatPage"
 import "./App.css"
@@ -19,6 +19,8 @@ const App = () => {
             <ChatPage />
           </RequireInfo>
         </Route>
+
+        <Redirect to="/" />
       </UserContextProvider>
     </BrowserRouter>
   )

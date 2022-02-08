@@ -13,8 +13,9 @@ const Chat = () => {
   const [users, setUsers] = useState([])
   const [messages, setMessages] = useState([])
   const [message, setMessage] = useState("")
-  const [isCurrentlyTyping, setIsCurrentlyTyping] = useState(false)
+  const [currentlyTypingUsers, setCurrentlyTypingUsers] = useState([])
   const ENDPOINT = "localhost:5000"
+  // const ENDPOINT = "https://wbdv-chat-app-server-node.herokuapp.com"
   const history = useHistory()
 
   useEffect(() => {
@@ -38,17 +39,16 @@ const Chat = () => {
       setUsers(users)
     })
 
-    socket.on("typing", ({ typingStatus }) => {
-      setIsCurrentlyTyping(typingStatus)
+    socket.on("typing", (ctusers) => {
+      const currentlyTypingUsersExceptSelf = ctusers.filter(
+        (ctuser) => ctuser.name !== name
+      )
+      setCurrentlyTypingUsers(currentlyTypingUsersExceptSelf)
     })
 
     return () => {
       console.log("unmounting chatPage component")
       socket.disconnect()
-      setName("")
-      setRoom("")
-      setMessages([])
-      setMessage("")
     }
   }, [])
 
@@ -63,14 +63,10 @@ const Chat = () => {
     socket.emit("sendMessage", message, () => {
       setMessage("")
     })
-    socket.emit("typing", "") // kind of like a workaround, any better way?
+    socket.emit("typing", "")
   }
 
-  const handleLeaveRoom = (e) => {
-    history.push("/")
-  }
-
-  console.log(messages)
+  console.log(messages, currentlyTypingUsers)
 
   return (
     <div className="container">
@@ -82,22 +78,24 @@ const Chat = () => {
               <i className="fas fa-circle"></i>
               <h2 className="chatbox__infobar__roomName">{room}</h2>
             </span>
-            <i className="fas fa-times" onClick={handleLeaveRoom}></i>
+            <a href="">
+              <i className="fas fa-times"></i>
+            </a>
           </div>
 
+          {/* chat messages */}
           <ScrollToBottom className="messages">
             {messages.map((value, index) => (
               <IndividualMessage key={index} message={value} />
             ))}
+            {currentlyTypingUsers.length > 0 ? (
+              <p className="currentlyTypingMessage">
+                User is typing a message...
+              </p>
+            ) : (
+              ""
+            )}
           </ScrollToBottom>
-
-          {isCurrentlyTyping ? (
-            <p className="currentlyTypingMessage">
-              User is typing a message...
-            </p>
-          ) : (
-            ""
-          )}
 
           {/* form */}
           <form onSubmit={handleMessageSubmit} className="chatbox__form">

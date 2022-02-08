@@ -1,5 +1,19 @@
-const moment = require("moment")
+// socket.on("typing", (typingUser) => {
+//   const typingUserExists = currentlyTypingUsers.filter(
+//     (v) => v.user === typingUser.user
+//   )
 
-const currentTime = moment().format("LT")
-
-console.log(currentTime)
+//   if (typingUserExists.length > 0) {
+//     if (typingUser.typingStatus === false) {
+//       console.log("user stopped typing")
+//       setCurrentlyTypingUsers((currentlyTypingUsers) =>
+//         currentlyTypingUsers.filter((v) => v.user !== typingUser.user)
+//       )
+//     }
+//   } else {
+//     setCurrentlyTypingUsers((currentlyTypingUsers) => [
+//       ...currentlyTypingUsers,
+//       typingUser,
+//     ])
+//   }
+// })
