@@ -93,14 +93,15 @@ io.on("connection", (socket) => {
 
     const user = removeUser(socket.id)
 
-    const updatedCurrentlyTypingUsers = removeCurrentlyTypingUser({
-      id: socket.id,
-      name: user.name,
-      room: user.room,
-    })
-
     if (user) {
-      io.to(user.room).emit("typing", updatedCurrentlyTypingUsers)
+      io.to(user.room).emit(
+        "typing",
+        removeCurrentlyTypingUser({
+          id: socket.id,
+          name: user.name,
+          room: user.room,
+        })
+      )
       io.to(user.room).emit("message", {
         user: "admin",
         text: `${user.name} has left`,
@@ -115,7 +116,7 @@ io.on("connection", (socket) => {
     try {
       console.log(getUsersInRoom(user.room))
     } catch (error) {
-      console.log("something went wrong") // this will run when last user exists room, for my own debugging purpose only
+      console.log("something went wrong") // for my own debugging purpose only
     }
   })
 })
